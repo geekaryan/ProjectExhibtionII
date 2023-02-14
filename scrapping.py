@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 url = "https://www.codewithharry.com/"
 
@@ -42,3 +43,24 @@ print(soup.find('p')['class'])
 
 #find all the elements with the same class name
 print(soup.find_all("p", class_ = "md:text-base"))
+
+
+# Sample data
+data = {'name': 'John', 'age': 30, 'city': 'New York'}
+
+# Convert data to JSON format
+json_data = json.dumps(data)
+
+# Print the JSON data
+print(json_data)
+
+# Sample data in file
+with open('data.txt', 'w') as f:
+    f.write('{"name": "John", "age": 30, "city": "New York"}')
+
+# Convert data to JSON format
+with open('data.txt', 'r') as f:
+    data = json.load(f)
+
+# Print the JSON data
+print(data)
