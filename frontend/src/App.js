@@ -3,10 +3,15 @@ import Data from "./components/Data";
 
 const App = () => {
   const [apiData, setApiData] = useState([]);
+  const [noData, setNoData] = useState("");
   const fetchApiHandler = async () => {
     const response = await fetch("http://localhost:5000/api");
+
     const data = await response.json();
-    // console.log(data.data.project);
+    if (data.length === 0) {
+      setNoData("No Data in the database");
+    }
+    console.log(data.data.project);
     setApiData(data.data.project);
   };
 
@@ -32,6 +37,7 @@ const App = () => {
         >
           Fetch Data Results
         </button>
+        <div>{noData}</div>
       </div>
       {apiData.map((e) => (
         <Data data={e} key={e._id} />
